@@ -1,0 +1,14 @@
+many:1 Employee.Education = EducationLevel.EducationLevelID 
+
+1:many Employee.EmployeeID + PerformanceRating.EmployeeID 
+
+1:many SatisfactionLevel.SatisfactionID + PerrformanceRating.EnvironmentSatisfaction 
+
+1:many SatisfactionLevel.SatisfactionID + PerrformanceRating.JobSatisfaction 
+
+1:many SatisfactionLevel.SatisfactionID + PerrformanceRating.RelationshipSatisfaction 
+
+1:many RatingLevel.RatingID + PerrformanceRating.SelfRating 
+
+1:many RatingLevel.RatingID + PerrformanceRating.ManagerRating
+
