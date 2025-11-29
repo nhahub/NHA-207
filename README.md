@@ -1,6 +1,7 @@
-# HR Analytics & Employee Retention Insights
+# HR Predictive Retention & Performance Insights
 
-This project focuses on analyzing key Human Resources metrics to better understand employee demographics, performance, satisfaction, and attrition behavior. By uncovering workforce patterns and risk areas, the analysis supports data-driven decision-making that improves employee retention, increases engagement, and strengthens organizational effectiveness.
+This project develops an advanced HR Analytics solution, transforming raw employee data into a comprehensive Star Schema to power an interactive dashboard and a Machine Learning model for predicting employee attrition risk. The goal is to provide HR leadership with actionable, forward-looking insights to improve employee retention, optimize performance management, and guide strategic organizational planning.
+
 Understanding workforce behavior is essential for reducing turnover, improving employee experience, and enabling strategic HR planning.
 
 This project analyzes HR data to uncover actionable insights related to:
@@ -11,11 +12,12 @@ This project analyzes HR data to uncover actionable insights related to:
 * Training utilization
 * Attrition (retention risk)
 
-The final outcome includes:
-* Interactive HR Dashboard (Power BI)  
-* Predictive Modeling (Attrition Prediction)  
-* Written Report with Insights & Recommendations  
 
+## Project Outcomes & Key Insights
+This project delivers both historical analytical capabilities and future-facing predictions:
+- Interactive HR Dashboard (Power BI): A multi-page visualization that tracks performance, satisfaction, operational efficiency, and highlights risk areas.
+- Predictive Model: A highly accurate Random Forest Classifier trained to calculate an Attrition Risk Score for every active employee.
+- Written Report: Final document detailing methodology, key findings (e.g., high-risk tenure groups), and strategic recommendations.
 ---
 
 ## Dataset Overview
@@ -38,36 +40,50 @@ HR_Data_Analysis_Project/
 │
 ├── data/
 │   ├── raw/           # Original untouched datasets
-│   └── clean/         # Cleaned and merged datasets
+│   └── clean/         # Cleaned, Modeled & Final Export files for Power BI
+│       ├── employee_master.csv        
+│       ├── performance_fact.csv       
+│       ├── ml_data_for_prediction.csv 
+│       └── employee_predictions.csv   
 │
 ├── scripts/
 │   ├── data_cleaning_functions.py
-│   └── kpi_functions.py
+│   ├── data_modeling.py               # (New Script for Star Schema Creation)
+│   └── model_training.py              # (New Script for ML Workflow)
 │
 ├── notebooks/
 │   ├── 01_Data_Cleaning.ipynb
 │   └── 02_KPI_Analysis.ipynb
 │
+├── models/            # Saved Machine Learning Model
+│   └── random_forest_model.pkl
+│
+├── report/            # Saved Machine Learning Model
+│   └── HR Analytics: Workforce Performance, Risk Assessment, and Strategic Recommendations.docx
+│
 ├── README.md
 └── requirements.txt
 ```
-## Phase 1 Complete: Data Cleaning & Preprocessing
+## Project Phases & Key Accomplishments
 
-* Loaded raw CSV files using pandas
-* Cleaned column names (standardized lowercase, underscores)
+### Phase 1: Data Cleaning & Star Schema Modeling
+
+* **ETL:** Loaded, cleaned, standardized, and merged raw data.
+* **Modeling:** Created the **Star Schema** architecture:
+    - **Dimension Table:** `employee_master.csv` (One row per employee).
+    - **Fact Table:** `performance_fact.csv` (Multiple time-series rows per employee).
+* **Feature Engineering (Advanced):** Added crucial time-series features to the Fact Table:
+    - `previous_manager_rating:` Lagging feature to track performance trend.
+    - `days_since_last_review:` Operational metric measuring management review cadence.
+
+
 * Handled missing values
 * Converted datatypes (hiredate, reviewdate → datetime)
 * Removed duplicates
 * Created a master merged dataset (bigDF.csv)
 * Exported cleaned files into data/clean/
 
-### Tools Used:
-
-- Python (Pandas, NumPy)
-- VS Code + Jupyter Notebook
-- Virtual Environment (.venv)
-
-## Phase 2 In Progress: KPI Development
+## Phase 2: KPI Development
 
 ### Employee Demographics KPIs:
 |KPI|Dataset Used|
@@ -102,6 +118,15 @@ HR_Data_Analysis_Project/
 - [ ] Phase 3	Data Visualization & Dashboard
 - [ ] Phase 4	Machine Learning Model (Attrition Prediction)
 - [ ] Phase 5	Final Report & Presentation
+
+
+
+### Tools & Libraries Used:
+
+- Python (Pandas, NumPy)
+- Machine Learning: Scikit-learn, Joblib
+- Development: VS Code, Virtual Environment (.venv)
+- Visualization: Power BI
 
 
 ## How to Run the Project
