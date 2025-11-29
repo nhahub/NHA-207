@@ -12,13 +12,39 @@ This project analyzes HR data to uncover actionable insights related to:
 * Training utilization
 * Attrition (retention risk)
 
-
 ## Project Outcomes & Key Insights
+
 This project delivers both historical analytical capabilities and future-facing predictions:
-- Interactive HR Dashboard (Power BI): A multi-page visualization that tracks performance, satisfaction, operational efficiency, and highlights risk areas.
-- Predictive Model: A highly accurate Random Forest Classifier trained to calculate an Attrition Risk Score for every active employee.
-- Written Report: Final document detailing methodology, key findings (e.g., high-risk tenure groups), and strategic recommendations.
+
+* **Interactive HR Dashboard (Power BI):** A multi-page visualization that tracks performance, satisfaction, operational efficiency, and highlights risk areas.
+* **Predictive Model:** A highly accurate Random Forest Classifier trained to calculate an Attrition Risk Score for every active employee.
+* **Written Report:** Final document detailing methodology, key findings (e.g., high-risk tenure groups), and strategic recommendations.
+
+### Final Dashboard Visuals
+
+**Figure 1: Predictive Retention**
+This page, driven by the Machine Learning model, identifies the **208 High-Risk Employees** and pinpoints the critical **0-2 year tenure group** as having the highest risk.
+
+![Predictive Retention Page](images/predictive_retention.JPG)
+
+**Figure 2: Performance & Satisfaction**
+This view is crucial for operational health, highlighting the significant 0.51 gap in Average Rating Alignment (Self vs. Manager).
+
+![Performance and Satisfaction Page](images/performance&satisfaction.JPG)
+
+***
+
+**Figure 3: Executive Summary**
+A high-level overview of historical KPIs, including the 16.12% Attrition Rate and its annual trend since 2012.
+
+![Executive Summary Page](images/executive_summary.JPG)
+
 ---
+
+
+
+
+
 
 ## Dataset Overview
 The project uses 5 CSV tables:
@@ -58,7 +84,7 @@ HR_Data_Analysis_Project/
 ├── models/            # Saved Machine Learning Model
 │   └── random_forest_model.pkl
 │
-├── report/            # Saved Machine Learning Model
+├── report/            
 │   └── HR Analytics: Workforce Performance, Risk Assessment, and Strategic Recommendations.docx
 │
 ├── README.md
@@ -76,49 +102,28 @@ HR_Data_Analysis_Project/
     - `previous_manager_rating:` Lagging feature to track performance trend.
     - `days_since_last_review:` Operational metric measuring management review cadence.
 
+---
+### Phase 2: KPI Development & Analysis
+* **HR KPIs:** Developed measures for demographics, satisfaction, and historical attrition trends.
 
-* Handled missing values
-* Converted datatypes (hiredate, reviewdate → datetime)
-* Removed duplicates
-* Created a master merged dataset (bigDF.csv)
-* Exported cleaned files into data/clean/
-
-## Phase 2: KPI Development
-
-### Employee Demographics KPIs:
-|KPI|Dataset Used|
-|---|------------|
-|Gender Distribution | employeeDF|
-|Age Distribution | employeeDF|
-|Education Level Distribution | bigDF|
-|Department Distribution | employeeDF|
-|Tenure Statistics | employeeDF|
+* **Operational KPIs:** Defined and calculated new operational metrics:
+    * `Average Days Between Reviews`
 
 
-### Performance & Satisfaction KPIs:
-|KPI|Dataset Used|
-|---|------------|
-|Average Performance Rating (Self + Manager) | bigDF|
-|Self vs Manager Rating Alignment (Latest Review Only)|bigDF (using reviewdate)|
-|Satisfaction & Engagement (Environment, Job, Relationship) |	bigDF|
-|Training Utilization Rate | bigDF|
-|Work-Life Balance Score|bigDF|
+### Phase 3: Data Visualization & Dashboard
+* **Dashboard:** Finalized a professional, interactive, multi-page Power BI dashboard.
+* **Predictive Layer:** Integrated the `employee_predictions.csv` file, linking the ML scores to the `employee_master` table.
+* **Actionable Visuals:** Created visuals targeting the **208 High-Risk Employees** (employees with $\ge 80\%$ predicted attrition probability).
 
 
-### Attrition KPIs:
-|KPI|Dataset Used|
-|---|------------|
-|Attrition Rate | employeeDF|
-|Attrition by Department | employeeDF|
+### Phase 4: Machine Learning Model
+* **Data Prep:** Aggregated time-series data into `ml_data_for_prediction.csv` (one row per employee).
 
+* **Modeling:** Trained and saved a Random Forest Classifier.
 
-## Project Phases:
-- [x] Phase 1	Data Cleaning & Merging
-- [x] Phase 2	KPI Development & Analysis
-- [ ] Phase 3	Data Visualization & Dashboard
-- [ ] Phase 4	Machine Learning Model (Attrition Prediction)
-- [ ] Phase 5	Final Report & Presentation
+* **Performance:** Model achieved 99.5% accuracy on the test set.
 
+* **Deployment:** Model output `employee_predictions.csv` was exported for immediate use in the Power BI dashboard.
 
 
 ### Tools & Libraries Used:
